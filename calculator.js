@@ -20,6 +20,12 @@ operButtons.forEach((button) => {
     });
 });
 
+document.addEventListener("keypress", (event) => {
+    if (event.key == "enter") {
+        main();
+    }
+})
+
 function main() {
     result = 0;
     num1 = 0;
