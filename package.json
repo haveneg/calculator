@@ -1,0 +1,25 @@
+{
+  "name": "calculator",
+  "version": "1.0.0",
+  "description": "A quick calculator app to help me practice javascript.",
+  "main": "calculator.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haveneg/calculator.git"
+  },
+  "keywords": [
+    "calculator"
+  ],
+  "author": "Haven Gee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haveneg/calculator/issues"
+  },
+  "homepage": "https://github.com/haveneg/calculator#readme",
+  "dependencies": {
+    "calc-lang": "^1.0.0"
+  }
+}

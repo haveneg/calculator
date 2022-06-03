@@ -1,69 +1,52 @@
-let textinput = document.getElementById("textinput");
-let NoN = 0;
-let result = 0;
-let num1 = 0;
-let num2 = 0;
-let oper = "";
+const Interpreter = require('calc-lang');
+const interpreter = new Interpreter(); //sets up the calculator interpreter
 
-let numButtons = document.querySelectorAll(".num");
-let operButtons = document.querySelectorAll(".oper");
 
-numButtons.forEach((button) => {
+let textinput = document.getElementById("textinput"); //main text input box
+let result = 0; //main result variable
+
+let numButtons = document.querySelectorAll(".num"); //number buttons
+let operButtons = document.querySelectorAll(".oper"); //operator buttons
+
+
+//initialize keys
+let enterButton = document.getElementById("enter");
+enterButton.addEventListener("click", main);
+
+let clearButton = document.getElementById("clearButton");
+clearButton.addEventListener("click", ac);
+
+let delButton = document.getElementById("delButton");
+delButton.addEventListener("click", del);
+
+numButtons.forEach((button) => { //adds each number to the text box when it is clicked
     button.addEventListener("click", () => {
         textinput.value += button.value.trim();
     });
 });
 
-operButtons.forEach((button) => {
+operButtons.forEach((button) => { //adds an operator to the text box when it is clicked
     button.addEventListener("click", () => {
         textinput.value += button.value.trim();
     });
 });
 
-document.addEventListener("keypress", (event) => {
+document.addEventListener("keypress", (event) => { //uses the enter key to run the main function
     if (event.key == "enter") {
         main();
     }
 })
 
-function main() {
-    result = 0;
-    num1 = 0;
-    num2 = 0;
-    oper = "";
-    let inputArray = textinput.value.split("");
-    let currentString = "";
-    for (let i=0;i<inputArray.length;i++) {
-        if (inputArray[i] !== "+" && inputArray[i] !== "-" && inputArray[i] !== "*" && inputArray[i] !== "/") {
-            currentString += inputArray[i];
-        } else {
-            if (NoN == 0) {
-                num1 = Number(currentString);
-            }
-            oper = inputArray[i];
-            currentString = "";
-            NoN = 1;
-        }
-    }
-    NoN = 0;
-    num2 = Number(currentString);
+function main() { //main function that interprets the expression and spits out an answer with the package
     
-    if (oper == "+") {
-        result = num1 + num2;
-    } else if (oper == "-") {
-        result = num1-num2;
-    } else if (oper == "*") {
-        result = num1 * num2;
-    } else if (oper == "/") {
-        result = num1/num2;
-    }
-    textinput.value = result;
+    result = interpreter.run(textinput.value); //runs the expression through  the interpreter
+    textinput.value = result; //prints the result to the text box
 }
 
 function ac() {
-    textinput.value = "";
+    textinput.value = ""; //clears the text input box
 }
 
 function del() {
-    textinput.value = textinput.value.slice(0, -1);
+    textinput.value = textinput.value.slice(0, -1); //backspace for the text input box
 }
